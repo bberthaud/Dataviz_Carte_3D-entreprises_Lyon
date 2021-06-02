@@ -16,16 +16,16 @@ var map = new mapboxgl.Map({
 });
 
 // Parameters
-const filename = "data/data_processed1.csv";
+const filename = "data/data_processed.csv";
 
 const OPTIONS = ["radius", "opacity", "elevationScale"];
 
 const SECTOR_RANGE = [
-  "Activités de services administratifs et de soutien",
+  "Activités de services administratifs",
   "Activités extra-territoriales",
   "Activités financières et d'assurance",
   "Activités immobilières",
-  "Activités spécialisées, scientifiques et techniques",
+  "Activités spécialisées, scientifiques et tech.",
   "Administration publique",
   "Agriculture, sylviculture et pêche",
   "Arts, spectacles et activités récréatives",
@@ -41,7 +41,7 @@ const SECTOR_RANGE = [
   "Production et distribution d'électricité ...",
   "Santé humaine et action sociale",
   "Transports et entreposage",
-  "nan"
+  "Données manquantes"
 ];
 
 // COLOR_RANGE length must be egal to SECTOR_RANGE length !
@@ -80,10 +80,10 @@ const LIGHT_SETTINGS = {
 
 // Legend
 
-const legendCellSize = 10,
-  margin = 5;
+const legendCellSize = 15,
+  margin = 10;
 var legend = d3.select("#legend-display").append("svg");
-legend.attr("height", COLOR_RANGE.length * legendCellSize);
+legend.attr("height", COLOR_RANGE.length * legendCellSize + margin);
 var panel = document.querySelector(".panel");
 legend.attr("width", getComputedStyle(panel).width);
 
@@ -135,12 +135,16 @@ legend
   .enter()
   .append("text")
   .attr("id", (d) => d)
-  .attr("x", 20)
+  .attr("x", 30)
   .attr("y", (d) => d * legendCellSize + 2 * margin)
   .text((d) => SECTOR_RANGE[d])
   .style("fill", "white")
-  .on("mouseover", function (d) {
+  .on("mouseover", function (event, d) {
     d3.select(this).style("cursor", "pointer");
+    d3.select(this).style("fill", "grey");
+  })
+  .on("mouseout", function (event, d) {
+    d3.select(this).style("fill", "white");
   })
   .on("click", function (event, d) {
     if (SECTOR_RANGE_DISPLAY.includes(d)) {
