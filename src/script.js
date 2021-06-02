@@ -1,8 +1,3 @@
-// Import
-import "./style.css";
-import * as mapboxgl from "mapbox-gl";
-import * as d3 from "d3";
-
 // Create the Mapbox map
 mapboxgl.accessToken =
   "pk.eyJ1IjoiYmJlcnRoYXVkIiwiYSI6ImNrbms1bW1yaTA3cWUydnBtMmczZWlrY3MifQ.BvIypZJdZEpE5v0KMStArA";
