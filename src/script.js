@@ -21,7 +21,7 @@ var map = new mapboxgl.Map({
 });
 
 // Parameters
-const filename = "data/data_processed1_bis.csv";
+const filename = "data/data_processed1.csv";
 
 const OPTIONS = ["radius", "opacity", "elevationScale"];
 
