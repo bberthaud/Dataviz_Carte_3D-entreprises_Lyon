@@ -47,7 +47,7 @@ Le fichier csv d'entrée doit être au format suivant :
 
 L'application a été développée pour être affichée sur Chrome. Elle peut aussi être utilisée sur Firefox mais le style n'a pas été travaillé pour ce navigateur web.
 
-La réalisation technique est faite grâce à D3.js avec mapbox. La couche de barres hexagonales est développée par deck.gl. Il est nécessaire de se créer un compte mapbox pour récupérer les cartes. Le compte doit être créé ici : https://www.mapbox.com/. Une fois créé copiez-collez votre "default public token" et remplacez la valeur de ``mapboxgl.accessToken`` dans ``script.js``.
+La réalisation technique est faite grâce à D3.js avec mapbox. La couche de barres hexagonales est développée par deck.gl. Il est nécessaire de se créer un compte mapbox pour récupérer les cartes. Le compte doit être créé ici : https://www.mapbox.com/. Une fois créé copiez-collez votre "default public token" et remplacez la valeur de ``mapboxgl.accessToken`` dans *script.js*.
 
 Lors de l'affichage automatique le rayon est automatiquement calculé en fonction du zoom selon la loi suivante :
 `rayon = (19 / zoom) ** 10`. Il s'agit d'une loi géométrique inverse et elle est réglée manuellement (ajustement des constantes) afin d'avoir un rendu satisfaisant pour l'UX.
@@ -57,5 +57,5 @@ Lors de l'affichage automatique le rayon est automatiquement calculé en fonctio
 
 ## Contact
 
-Pour toutes questions techniques ou suggérations : baptisteberthaud@hotmail.fr
+Pour toutes questions techniques ou suggestions : baptisteberthaud@hotmail.fr
 
