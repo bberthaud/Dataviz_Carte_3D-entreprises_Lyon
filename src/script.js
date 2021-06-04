@@ -18,6 +18,13 @@ var map = new mapboxgl.Map({
 // Parameters
 const filename = "data/data_processed.csv";
 
+var capitauxPresent = false;
+
+//TODO : extract value
+d3.csv(filename).then(function (data) {
+  capitauxPresent = data.columns.includes("capitaux");
+});
+
 const OPTIONS = ["radius", "opacity", "elevationScale"];
 
 const SECTOR_RANGE = [
@@ -125,7 +132,10 @@ var valueCapitaux = 0,
 function filterData(d) {
   const sectorFilter = SECTOR_RANGE_DISPLAY.includes(+d.secteur);
   const workforceFilter = +d.RH >= valueRH0 && +d.RH <= valueRH1;
-  const investmentFilter = +d.capitaux >= valueCapitaux;
+  var investmentFilter = true;
+  if (capitauxPresent) {
+    investmentFilter = +d.capitaux >= valueCapitaux;
+  }
   return sectorFilter && workforceFilter && investmentFilter;
 }
 
@@ -312,6 +322,13 @@ function onHover(info) {
 // Create the hexagon layer
 var hexagonLayer;
 
+var maxElevationDomain = 10000000;
+d3.csv(filename).then(function (data) {
+  maxElevationDomain = d3.sum(data, function (d) {
+    return +d.RH;
+  });
+});
+
 hexagonLayer = new MapboxLayer({
   type: HexagonLayer,
   id: "heatmap",
@@ -324,7 +341,7 @@ hexagonLayer = new MapboxLayer({
   colorDomain: [0, COLOR_RANGE.length - 1],
   elevationRange: [0, 500],
   // elevationDomain arbitrary
-  elevationDomain: [0, 10000000],
+  elevationDomain: [0, maxElevationDomain],
   elevationScale: 250,
   extruded: true,
   getPosition: (d) => [+d.lng, +d.lat],
@@ -415,31 +432,35 @@ OPTIONS.forEach((key) => {
 });
 
 // Filter on national investment
-
 var key = "capitaux";
-document.getElementById(key).onchange = (event) => {
-  valueCapitaux = Number(event.target.value);
-  document.getElementById(key + "-value").value = valueCapitaux;
-  if (hexagonLayer) {
-    hexagonLayer.setProps({
-      data: d3.csv(filename).then(function (data) {
-        return data.filter((d) => filterData(d));
-      })
-    });
-  }
-};
 
-document.getElementById(key + "-value").onchange = (event) => {
-  valueCapitaux = Number(event.target.value);
-  document.getElementById(key).value = valueCapitaux;
-  if (hexagonLayer) {
-    hexagonLayer.setProps({
-      data: d3.csv(filename).then(function (data) {
-        return data.filter((d) => filterData(d));
-      })
-    });
-  }
-};
+if (capitauxPresent) {
+  document.getElementById(key).onchange = (event) => {
+    valueCapitaux = Number(event.target.value);
+    document.getElementById(key + "-value").value = valueCapitaux;
+    if (hexagonLayer) {
+      hexagonLayer.setProps({
+        data: d3.csv(filename).then(function (data) {
+          return data.filter((d) => filterData(d));
+        })
+      });
+    }
+  };
+
+  document.getElementById(key + "-value").onchange = (event) => {
+    valueCapitaux = Number(event.target.value);
+    document.getElementById(key).value = valueCapitaux;
+    if (hexagonLayer) {
+      hexagonLayer.setProps({
+        data: d3.csv(filename).then(function (data) {
+          return data.filter((d) => filterData(d));
+        })
+      });
+    }
+  };
+} else {
+  document.getElementById(key + "-present").remove();
+}
 
 // Filter for elevation based on filter-slider
 

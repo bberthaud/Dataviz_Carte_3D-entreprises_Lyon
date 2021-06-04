@@ -15,12 +15,14 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <script src="https://kit.fontawesome.com/2adc82431c.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
     <div id="panel">
         <div id="switch-panel" class="panel">
-            <label>Affichage automatique</label>
+            <label id="affichage">Affichage automatique</label>
             <label class="switch">
                 <input id="switch" type="checkbox" checked></input>
                 <span class="slider round"></span>
@@ -46,7 +48,7 @@
                 <input id="elevationScale" type="range" min="10" max="500" step="10" value="250"></input>
                 <input id="elevationScale-value" type="number" min="10" max="500" value="250"></input>
             </div>
-            <div>
+            <div id="capitaux-present">
                 <label>Capitaux francais (%)</label>
                 <br>
                 <input id="capitaux" type="range" min="0" max="100" step="1" value="0"></input>
@@ -90,6 +92,7 @@
         </div>
 
         <div id="info-panel" class="panel">
+            <i class="fas fa-info-circle"></i>
             <label id="info-control" style="cursor: pointer;">Infos</label>
         </div>
     </div>
@@ -122,7 +125,7 @@
             <br>
             <br>
             
-            Le projet est disponible en <a href="https://github.com/">open source ici</a>. Le dispositif vous intéresse ? Vous en imaginez une nouvelle utilisation ? Contactez nous sur <a href="mailto:datagora@lists.erasme.org">datagora@lists.erasme.org</a>                    
+            Le projet est disponible en <a href="https://github.com/bberthaud/Dataviz_Carte_3D-entreprises_Lyon">open source ici</a>. Le dispositif vous intéresse ? Vous en imaginez une nouvelle utilisation ? Contactez nous sur <a href="mailto:datagora@lists.erasme.org">datagora@lists.erasme.org</a>                    
         </p>
         <input type="button" id="info-ok" value="OK">
     </div>
