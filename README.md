@@ -3,6 +3,19 @@
 L'objectif de cette dataviz est de visualiser sur une carte quels sont les secteurs d'activités des entreprises de la métropole de Lyon, comment ces secteurs sont répartis spatialement, quelle taille chacun représente. Le projet consiste à réaliser une carte 3D (3 dimensions : spatiale, couleur et hauteur) avec les entreprises du territoire selon leur secteur d'activité, encodé visuellement par la couleur, et selon leur taille en CA (chiffre d'affaires) ou RH (nombre de salariés), encodée visuellement par la hauteur. Il est aussi possible de tenir compte de leurs capitaux (4e dimension) en appliquant un filtre.
 
 
+## Lancement
+
+Clonez le repo git :
+
+``git clone https://github.com/bberthaud/Dataviz_Carte_3D-entreprises_Lyon.git``
+
+Il est nécessaire de se créer un compte mapbox pour récupérer les cartes. Le compte doit être créé ici : https://www.mapbox.com/. Une fois créé copiez-collez votre "default public token" et remplacez la valeur de ``mapboxgl.accessToken`` dans *script.js*.
+
+Lancez un serveur local avec python depuis le dossier parent :
+
+``python3 -m http.server``
+
+
 ## Attentes
 
 La dataviz s'inspire de celle-ci : https://bl.ocks.org/ryanbaumann/f4a2e6970eedd1948aca182d0f184968. Elle est une adaptation de cette dernière avec les fonctionnalités suivantes :
@@ -47,7 +60,7 @@ Le fichier csv d'entrée doit être au format suivant :
 
 L'application a été développée pour être affichée sur Chrome. Elle peut aussi être utilisée sur Firefox mais le style n'a pas été travaillé pour ce navigateur web.
 
-La réalisation technique est faite grâce à D3.js avec mapbox. La couche de barres hexagonales est développée par deck.gl. Il est nécessaire de se créer un compte mapbox pour récupérer les cartes. Le compte doit être créé ici : https://www.mapbox.com/. Une fois créé copiez-collez votre "default public token" et remplacez la valeur de ``mapboxgl.accessToken`` dans *script.js*.
+La réalisation technique est faite grâce à D3.js avec mapbox. La couche de barres hexagonales est développée par deck.gl. 
 
 Lors de l'affichage automatique le rayon est automatiquement calculé en fonction du zoom selon la loi suivante :
 `rayon = (19 / zoom) ** 10`. Il s'agit d'une loi géométrique inverse et elle est réglée manuellement (ajustement des constantes) afin d'avoir un rendu satisfaisant pour l'UX.
