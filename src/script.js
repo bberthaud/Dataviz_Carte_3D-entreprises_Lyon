@@ -1,6 +1,6 @@
 // Create the Mapbox map
 mapboxgl.accessToken =
-  "pk.eyJ1IjoiYmJlcnRoYXVkIiwiYSI6ImNrbms1bW1yaTA3cWUydnBtMmczZWlrY3MifQ.BvIypZJdZEpE5v0KMStArA";
+  "yourToken";
 
 var { MapboxLayer, HexagonLayer } = deck;
 
